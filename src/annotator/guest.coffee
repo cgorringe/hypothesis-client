@@ -445,13 +445,13 @@ module.exports = class Guest extends Delegator
 
   # Did an event originate from an element in the annotator UI? (eg. the sidebar
   # frame, or its toolbar)
-  _isEventInAnnotator: (event) ->
+  isEventInAnnotator: (event) ->
     return closest(event.target, '.annotator-frame') != null
 
   # Event handlers to close the sidebar when the user clicks in the document.
   # These really ought to live with the sidebar code.
   onElementClick: (event) ->
-    if !this._isEventInAnnotator(event) and !@selectedTargets?.length
+    if !this.isEventInAnnotator(event) and !@selectedTargets?.length
       @crossframe?.call('hideSidebar')
 
   onElementTouchStart: (event) ->
@@ -460,7 +460,7 @@ module.exports = class Guest extends Delegator
     # adding that to every element, we can add the initial
     # touchstart event which is always registered to
     # make up for the lack of click support for all elements.
-    if !this._isEventInAnnotator(event) and !@selectedTargets?.length
+    if !this.isEventInAnnotator(event) and !@selectedTargets?.length
       @crossframe?.call('hideSidebar')
 
   onHighlightMouseover: (event) ->
