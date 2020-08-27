@@ -451,7 +451,7 @@ module.exports = class Guest extends Delegator
   # Event handlers to close the sidebar when the user clicks in the document.
   # These really ought to live with the sidebar code.
   onElementClick: (event) ->
-    if !this.isEventInAnnotator(event) and !@selectedTargets?.length
+    if !this.isEventInAnnotator(event) and !@selectedTargets?.length and not event.annotations?.length
       @crossframe?.call('hideSidebar')
 
   onElementTouchStart: (event) ->
@@ -460,7 +460,7 @@ module.exports = class Guest extends Delegator
     # adding that to every element, we can add the initial
     # touchstart event which is always registered to
     # make up for the lack of click support for all elements.
-    if !this.isEventInAnnotator(event) and !@selectedTargets?.length
+    if !this.isEventInAnnotator(event) and !@selectedTargets?.length and not event.annotations?.length
       @crossframe?.call('hideSidebar')
 
   onHighlightMouseover: (event) ->
