@@ -45,6 +45,7 @@ export default class SearchClient extends TinyEmitter {
         sort: 'created',
         order: 'asc',
         _separate_replies: this._separateReplies,
+        user: 'acct:caslonkahle@hypothes.is' // [CG]
       },
       query
     );
