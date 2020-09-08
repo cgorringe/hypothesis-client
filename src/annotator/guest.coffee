@@ -256,6 +256,13 @@ module.exports = class Guest extends Delegator
         highlights = highlighter.highlightRange(normedRange)
 
         $(highlights).data('annotation', anchor.annotation)
+
+        # Add blue underline when hovered over [CG] TO REMOVE
+        # $(highlights).mouseenter ->
+        #   $(this).css('border-bottom', '3px solid #06f')
+        # $(highlights).mouseleave ->
+        #   $(this).css('border-bottom', '')
+
         anchor.highlights = highlights
         return anchor
 
@@ -416,6 +423,11 @@ module.exports = class Guest extends Delegator
     tags = (a.$tag for a in annotations)
     @crossframe?.call('focusAnnotations', tags)
 
+    # Underline all fragments when hovering over annotation. [CG]
+    for anchor in @anchors when anchor.highlights?
+      toggle = anchor.annotation.$tag in tags
+      $(anchor.highlights).toggleClass('hypothesis-highlight-underline', toggle)
+
   _onSelection: (range) ->
     selection = document.getSelection()
     isBackwards = rangeUtil.isSelectionBackwards(selection)
@@ -469,6 +481,9 @@ module.exports = class Guest extends Delegator
     annotations = event.annotations ?= []
     annotations.push(annotation)
 
+    # Add blue underline when hovered over [CG] TO REMOVE
+    # $(event.currentTarget).css('border-bottom', '3px solid #06f')
+
     # The innermost highlight will execute this.
     # The timeout gives time for the event to bubble, letting any overlapping
     # highlights have time to add their annotations to the list stored on the
@@ -479,6 +494,8 @@ module.exports = class Guest extends Delegator
   onHighlightMouseout: (event) ->
     return unless @visibleHighlights
     this.focusAnnotations []
+    # Clear blue underline when hovered over [CG] TO REMOVE
+    # $(event.currentTarget).css('border-bottom', '')
 
   onHighlightClick: (event) ->
     return unless @visibleHighlights

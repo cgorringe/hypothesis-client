@@ -72,5 +72,10 @@
         background-color: transparent !important;
       }
     }
+
+    // Underline when annotation hovered over [CG]
+    &.hypothesis-highlight-underline {
+      border-bottom: 3px solid #08f;
+    }
   }
 }
