@@ -495,7 +495,10 @@ module.exports = class Guest extends Delegator
     # See the comment in onHighlightMouseover
     if event.target is event.currentTarget
       xor = (event.metaKey or event.ctrlKey)
-      setTimeout => this.selectAnnotations(annotations, xor)
+      # setTimeout => this.selectAnnotations(annotations, xor) # prevent sidebar [CG]
+      # open url in a new tab
+      url = 'https://web.archive.org' # TEST
+      $('<a />', { href: url, target: '_blank', rel: 'noopener noreferrer' }).get(0).click()
 
   # Pass true to show the highlights in the frame or false to disable.
   setVisibleHighlights: (shouldShowHighlights) ->
