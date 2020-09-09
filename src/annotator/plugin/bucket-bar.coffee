@@ -250,9 +250,10 @@ module.exports = class BucketBar extends Plugin
         else if (@isLower bucket)
           scrollToClosest(@buckets[bucket], 'down')
         else
-          annotations = (anchor.annotation for anchor in @buckets[bucket])
-          @annotator.selectAnnotations annotations,
-            (event.ctrlKey or event.metaKey),
+          # Commented out to prevent sidebar from opening [CG]
+          # annotations = (anchor.annotation for anchor in @buckets[bucket])
+          # @annotator.selectAnnotations annotations,
+          #   (event.ctrlKey or event.metaKey),
 
     this._buildTabs(@tabs, @buckets)
 
