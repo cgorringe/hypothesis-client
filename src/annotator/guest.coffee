@@ -434,9 +434,10 @@ module.exports = class Guest extends Delegator
     @selectedRanges = [range]
     @toolbar?.newAnnotationType = 'annotation'
 
-    {left, top, arrowDirection} = this.adderCtrl.target(focusRect, isBackwards)
-    this.adderCtrl.annotationsForSelection = annotationsForSelection()
-    this.adderCtrl.showAt(left, top, arrowDirection)
+    # Commented out to prevent Adder context menu from displaying. [CG]
+    # {left, top, arrowDirection} = this.adderCtrl.target(focusRect, isBackwards)
+    # this.adderCtrl.annotationsForSelection = annotationsForSelection()
+    # this.adderCtrl.showAt(left, top, arrowDirection)
 
   _onClearSelection: () ->
     this.adderCtrl.hide()
