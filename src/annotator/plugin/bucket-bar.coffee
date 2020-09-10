@@ -7,7 +7,8 @@ highlighter = require('../highlighter')
 
 BUCKET_SIZE = 16                              # Regular bucket size
 BUCKET_NAV_SIZE = BUCKET_SIZE + 6             # Bucket plus arrow (up/down)
-BUCKET_TOP_THRESHOLD = 115 + BUCKET_NAV_SIZE  # Toolbar
+# BUCKET_TOP_THRESHOLD = 115 + BUCKET_NAV_SIZE  # Toolbar
+BUCKET_TOP_THRESHOLD = 27 + BUCKET_NAV_SIZE  # Toolbar [CG]
 
 
 # Scroll to the next closest anchor off screen in the given direction.
