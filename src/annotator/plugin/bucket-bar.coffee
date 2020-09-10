@@ -265,9 +265,9 @@ module.exports = class BucketBar extends Plugin
       bucketLength = bucket?.length
 
       title = if bucketLength != 1
-        "Show #{bucketLength} annotations"
+        "#{bucketLength} annotations"
       else if bucketLength > 0
-        'Show one annotation'
+        '1 annotation'
 
       el.attr('title', title)
       el.toggleClass('upper', @isUpper(d))
