@@ -403,7 +403,17 @@ module.exports = class Guest extends Delegator
   showAnnotations: (annotations) ->
     tags = (a.$tag for a in annotations)
     @crossframe?.call('showAnnotations', tags)
-    @crossframe?.call('showSidebar')
+    # @crossframe?.call('showSidebar') # prevent sidebar from showing [CG]
+
+  # Open annotation in new tab if text contains a url. NOT DONE [CG]
+  openAnnotationInTab: (annotation) ->
+    console.log('openAnnotationInTab: ', annotation) # DEBUG
+    # open url in a new tab
+    url = 'https://web.archive.org' # TEST
+    # right now links doesn't exist
+    if annotation.links and annotation.links.html
+      url = annotation.links.html
+    $('<a />', { href: url, target: '_blank', rel: 'noopener noreferrer' }).get(0).click()
 
   toggleAnnotationSelection: (annotations) ->
     tags = (a.$tag for a in annotations)
@@ -496,10 +506,8 @@ module.exports = class Guest extends Delegator
     # See the comment in onHighlightMouseover
     if event.target is event.currentTarget
       xor = (event.metaKey or event.ctrlKey)
-      # setTimeout => this.selectAnnotations(annotations, xor) # prevent sidebar [CG]
-      # open url in a new tab
-      url = 'https://web.archive.org' # TEST
-      $('<a />', { href: url, target: '_blank', rel: 'noopener noreferrer' }).get(0).click()
+      setTimeout => this.selectAnnotations(annotations, xor)
+      this.openAnnotationInTab annotation # [CG]
 
   # Pass true to show the highlights in the frame or false to disable.
   setVisibleHighlights: (shouldShowHighlights) ->
